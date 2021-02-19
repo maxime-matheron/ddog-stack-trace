@@ -10,7 +10,7 @@ def init_tracer(service_name):
     set_global_tracer(tracer)
     return tracer
 
-init_tracer('my_service_name')
+init_tracer('stacktrace')
 
 def trigger_exception():
     try:
@@ -30,8 +30,5 @@ def first_function():
     with tracer.trace('call.second'):
         second_function()
 
-def main():
-    with tracer.trace('call.root'):
-        first_function()
-
-main()
+with tracer.trace('call.root'):
+    first_function()

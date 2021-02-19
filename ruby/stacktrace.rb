@@ -22,10 +22,6 @@ def first_function
     end
 end
 
-def main
-    Datadog.tracer.trace("call.root") do
-        first_function()
-    end
+Datadog.tracer.trace("call.root") do
+    first_function()
 end
-
-main()
