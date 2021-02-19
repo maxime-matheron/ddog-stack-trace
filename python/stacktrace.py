@@ -14,13 +14,15 @@ init_tracer('my_service_name')
 
 def trigger_exception():
     try:
-        v = {}['a']
+        with tracer.trace('call.fetch'):
+            v = {}['a']
     except KeyError as e:
         raise ValueError('failed in trigger_exception')
 
 def second_function():
     try:
-        trigger_exception()
+        with tracer.trace('call.trigger'):
+            trigger_exception()
     except ValueError as e:
         raise ValueError('failed in second_function') from e
 
@@ -32,5 +34,4 @@ def main():
     with tracer.trace('call.root'):
         first_function()
 
-if __name__ == "__main__":
-    main()
+main()

@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ddtrace (0.45.0)
+      msgpack
+    msgpack (1.4.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ddtrace
+
+BUNDLED WITH
+   1.17.2
