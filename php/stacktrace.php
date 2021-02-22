@@ -1,9 +1,9 @@
 <?php
 function trigger_exception() {
     try {
-        throw new Exception('manually generated exception');
+        throw new InvalidArgumentException('manually generated exception');
     } catch (Exception $e) {
-        throw new Exception('failed in trigger_exception');
+        throw new LogicException('failed in trigger_exception', 0, $e);
     }
 }
 
@@ -11,7 +11,7 @@ function second_function() {
     try {
         trigger_exception();
     } catch (Exception $e) {
-        throw new Exception('failed in second_function');
+        throw new LogicException('failed in second_function', 0, $e);
     }
 }
 
@@ -21,3 +21,5 @@ function first_function() {
 
 first_function()
 ?>
+
+
