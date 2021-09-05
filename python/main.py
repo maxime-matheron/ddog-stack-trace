@@ -1,9 +1,12 @@
+from flask import Flask
 from ddtrace import tracer
 from ddtrace.opentracer import Tracer, set_global_tracer
 
+server = Flask(__name__)
+
 def init_tracer(service_name):
     config = {
-      'agent_hostname': 'localhost',
+      'agent_hostname': 'dd-agent',
       'agent_port': 8126,
     }
     tracer = Tracer(service_name, config=config)
@@ -37,5 +40,15 @@ def first_function():
     with tracer.trace('call.second_function'):
         second_function()
 
-with tracer.trace('call.first_function'):
-    first_function()
+@server.route("/generate-stack")
+def hello():
+    with tracer.trace('call.first_function'):
+        try:
+            first_function()
+        except: 
+            pass
+    return "<p>Python stack trace generated!</p>"
+
+if __name__ == "__main__":
+   server.run(host='0.0.0.0')
+
