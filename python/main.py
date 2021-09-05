@@ -4,16 +4,16 @@ from ddtrace.opentracer import Tracer, set_global_tracer
 
 server = Flask(__name__)
 
-def init_tracer(service_name):
+def init_tracer():
     config = {
       'agent_hostname': 'dd-agent',
       'agent_port': 8126,
     }
-    tracer = Tracer(service_name, config=config)
+    tracer = Tracer('ddog-python-stack', config=config)
     set_global_tracer(tracer)
     return tracer
 
-init_tracer('stacktrace')
+init_tracer()
 
 def fourth_function():
     try:
