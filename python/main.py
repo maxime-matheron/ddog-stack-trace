@@ -9,7 +9,7 @@ def init_tracer():
       'agent_hostname': 'dd-agent',
       'agent_port': 8126,
     }
-    tracer = Tracer('ddog-python-stack', config=config)
+    tracer = Tracer('dd-python-stack', config=config)
     set_global_tracer(tracer)
     return tracer
 

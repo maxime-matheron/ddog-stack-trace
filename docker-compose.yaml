@@ -15,11 +15,11 @@ services:
     environment:
       - DD_API_KEY=${DD_API_KEY}
       - DD_APM_ENABLED=true
-  dd-python-stack-trace:
+  dd-python-stack:
     build:
       context: ./python/
       dockerfile: Dockerfile
-      args:
-        buildno: 1
+    environment:
+      - DD_SERVICE="dd-python-stack"
     ports:
       - 127.0.0.1:5000:5000/tcp
