@@ -12,23 +12,30 @@ def init_tracer(service_name):
 
 init_tracer('stacktrace')
 
-def trigger_exception():
+def fourth_function():
     try:
-        with tracer.trace('call.fetch'):
+        with tracer.trace('run.operation'):
             v = {}['a']
     except KeyError as e:
-        raise ValueError('failed in trigger_exception')
+        raise ValueError('failed in fourth_function')
+
+def third_function():
+    try:
+        with tracer.trace('call.fourth_function'):
+            fourth_function()
+    except ValueError as e:
+        raise ValueError('failed to call fourth_function in third_function')
 
 def second_function():
     try:
-        with tracer.trace('call.trigger'):
-            trigger_exception()
+        with tracer.trace('call.third_function'):
+            third_function()
     except ValueError as e:
-        raise ValueError('failed in second_function') from e
+        raise ValueError('failed to call third_function in second_function') from e
 
 def first_function():
-    with tracer.trace('call.second'):
+    with tracer.trace('call.second_function'):
         second_function()
 
-with tracer.trace('call.root'):
+with tracer.trace('call.first_function'):
     first_function()
