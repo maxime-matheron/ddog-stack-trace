@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  dd-agent:
+    image: datadog/agent:latest
+    container_name: agent
+    ports:
+      - 127.0.0.1:8126:8126/tcp
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    deploy:
+      restart_policy:
+        condition: any
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_APM_ENABLED=true
