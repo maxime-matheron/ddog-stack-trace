@@ -21,5 +21,15 @@ services:
       dockerfile: Dockerfile
     environment:
       - DD_SERVICE="dd-python-stack"
+      - SERVER_PORT=5000
     ports:
       - 127.0.0.1:5000:5000/tcp
+  dd-golang-stack:
+    build:
+      context: ./golang/
+      dockerfile: Dockerfile
+    environment:
+      - DD_SERVICE="dd-golang-stack"
+      - SERVER_PORT=5001
+    ports:
+      - 127.0.0.1:5001:5001/tcp

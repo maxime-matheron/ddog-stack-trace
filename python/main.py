@@ -9,7 +9,7 @@ def init_tracer():
       'agent_hostname': 'dd-agent',
       'agent_port': 8126,
     }
-    tracer = Tracer('dd-python-stack', config=config)
+    tracer = Tracer('', config=config)
     set_global_tracer(tracer)
     return tracer
 
@@ -41,7 +41,7 @@ def first_function():
         second_function()
 
 @server.route("/generate-stack")
-def hello():
+def generate_stack():
     with tracer.trace('call.first_function'):
         try:
             first_function()
@@ -50,5 +50,5 @@ def hello():
     return "<p>Python stack trace generated!</p>"
 
 if __name__ == "__main__":
-   server.run(host='0.0.0.0')
+   server.run(host='0.0.0.0', port=5000)
 
