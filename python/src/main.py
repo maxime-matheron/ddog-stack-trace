@@ -20,5 +20,5 @@ def generate_stack():
     return "<p>Python stack trace generated!</p>"
 
 if __name__ == "__main__":
-   app.run()
+   app.run(host='0.0.0.0')
 

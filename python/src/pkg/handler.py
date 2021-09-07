@@ -24,5 +24,5 @@ def fourth_function():
         s = "baba"
         a = s.split("a")
         print(a[5])
-    except KeyError as e:
+    except IndexError as e:
         raise ValueError('failed in fourth_function')
