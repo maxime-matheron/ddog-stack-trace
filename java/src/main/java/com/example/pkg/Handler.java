@@ -1,12 +1,7 @@
 package com.example.pkg;
 
-import java.util.HashMap;
-import io.opentracing.Span;
-import io.opentracing.Scope;
-import io.opentracing.Tracer;
 import com.example.pkg.Handler;
 import datadog.trace.api.Trace;
-import io.opentracing.util.GlobalTracer;
 
 public class Handler {
 
@@ -20,7 +15,9 @@ public class Handler {
         try {
             this.thirdFunction();
         } catch (Exception e) {
-            throw new Exception("failed when calling third_function");
+            Exception chained = new Exception("failed when calling second_function");
+            chained.initCause(e);
+            throw chained;
         }
     }
 
@@ -36,8 +33,9 @@ public class Handler {
     @Trace(operationName = "fourth_function")
     public void fourthFunction() throws Exception {
         try {
-            HashMap<String, Boolean> map = new HashMap<String, Boolean>();
-            System.out.println(map.get(true));
+            String s = "ababa";
+            String[] a = s.split("a");
+            System.out.println(a[5]);
         } catch (Exception e) {
             throw new Exception("failed in fourth_function");
         }
