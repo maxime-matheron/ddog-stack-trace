@@ -1,20 +1,18 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"os"
 
 	"ddgolangstack/pkg"
 
-	"github.com/gorilla/mux"
+	muxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func GenerateStack(w http.ResponseWriter, r *http.Request) {
-	ctx := context.Background()
-	span, ctx := tracer.StartSpanFromContext(ctx, "call.first_function")
+	span, ctx := tracer.StartSpanFromContext(r.Context(), "call.first_function")
 	defer span.Finish()
 
 	if err := pkg.FirstFunction(ctx); err != nil {
@@ -36,8 +34,7 @@ func main() {
 	)
 	defer tracer.Stop()
 
-	// Register endpoints to router
-	r := mux.NewRouter()
+	r := muxtrace.NewRouter(muxtrace.WithServiceName(os.Getenv("DD_SERVICE")))
 	r.HandleFunc("/generate-stack", GenerateStack)
 	http.Handle("/", r)
 

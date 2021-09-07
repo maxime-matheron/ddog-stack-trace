@@ -19,8 +19,8 @@ def third_function():
         raise ValueError('failed to call fourth_function in third_function')
 
 def fourth_function():
-    try:
-        with tracer.trace('run.operation'):
+    with tracer.trace('run.operation'):
+        try:
             v = {}['a']
-    except KeyError as e:
-        raise ValueError('failed in fourth_function')
+        except KeyError as e:
+            raise ValueError('failed in fourth_function')
