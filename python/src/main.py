@@ -7,7 +7,7 @@ server = Flask(__name__)
 
 def init_tracer():
     config = {
-      'agent_hostname': 'localhost',
+      'agent_hostname': 'dd-agent',
       'agent_port': 8126,
     }
     tracer = Tracer('', config=config)
