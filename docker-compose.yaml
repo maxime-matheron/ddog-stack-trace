@@ -33,3 +33,12 @@ services:
       - SERVER_PORT=5001
     ports:
       - 127.0.0.1:5001:5001/tcp
+  # dd-java-stack:
+  #   build:
+  #     context: ./java/
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - DD_SERVICE="dd-java-stack"
+  #     - SERVER_PORT=5002
+  #   ports:
+  #     - 127.0.0.1:5002:5002/tcp
