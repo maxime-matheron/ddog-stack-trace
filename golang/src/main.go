@@ -24,7 +24,6 @@ func GenerateStack(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// Start Datadog tracer
 	tracer.Start(
 		tracer.WithAgentAddr("dd-agent"),
 		tracer.WithServiceName(os.Getenv("DD_SERVICE")),

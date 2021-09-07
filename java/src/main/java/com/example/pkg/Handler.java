@@ -33,7 +33,7 @@ public class Handler {
     @Trace(operationName = "fourth_function")
     public void fourthFunction() throws Exception {
         try {
-            String s = "ababa";
+            String s = "baba";
             String[] a = s.split("a");
             System.out.println(a[5]);
         } catch (Exception e) {
