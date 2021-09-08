@@ -17,4 +17,4 @@ docker-compose up --build -d
 
 - You should see the `<Language> stack trace generated!` in your browser
 
-- Visit the [DD trace explorer][https://app.datadoghq.com/apm/traces] to see the generated traces containing stack traces
+- Visit the [DD trace explorer](https://app.datadoghq.com/apm/traces) to see the generated traces containing stack traces
