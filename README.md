@@ -10,8 +10,11 @@ export DD_API_KEY="<YOUR_API_KEY>"
 docker-compose up --build -d
 ```
 
-- Each server exposes the `/generate-stack` endpoint, target the language you want to targeting `localhost` on the right port:
-    - `5000` for Python
-    - `5001` for Golang
-    - `5002` for Java
-    - etc
+- Each server exposes the `/generate-stack` endpoint, target the language you want by visiting `localhost:<PORT>` where:
+    - `5000` is for Python
+    - `5001` is for Golang
+    - `5002` is for Java
+
+- You should see the `<Language> stack trace generated!` in your browser
+
+- Visit the [DD trace explorer][https://app.datadoghq.com/apm/traces] to see the generated traces containing stack traces
