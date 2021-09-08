@@ -15,6 +15,6 @@ docker-compose up --build -d
     - `5001` is for Golang
     - `5002` is for Java
 
-- You should see the `<Language> stack trace generated!` in your browser
+- You should see the `<Language> stack trace generated!` response in your browser
 
 - Visit the [DD trace explorer](https://app.datadoghq.com/apm/traces) to see the generated traces containing stack traces
