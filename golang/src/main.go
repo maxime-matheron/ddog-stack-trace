@@ -12,13 +12,7 @@ import (
 )
 
 func GenerateStack(w http.ResponseWriter, r *http.Request) {
-	span, ctx := tracer.StartSpanFromContext(r.Context(), "call.first_function")
-	defer span.Finish()
-
-	if err := pkg.FirstFunction(ctx); err != nil {
-		span.SetTag("error", err)
-	}
-
+	_ = pkg.FirstFunction(r.Context())
 	fmt.Fprint(w, "<p>Golang stack trace generated!</p>")
 	w.WriteHeader(http.StatusOK)
 }

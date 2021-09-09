@@ -1,24 +1,24 @@
 from ddtrace import tracer
 
-@tracer.wrap("call.first_function")
+@tracer.wrap("first_function")
 def first_function():
     second_function()
 
-@tracer.wrap("call.second_function")
+@tracer.wrap("second_function")
 def second_function():
     try:
         third_function()
     except ValueError as e:
-        raise ValueError('failed to call third_function in second_function') from e
+        raise ValueError('error when calling third_function in second_function') from e
 
-@tracer.wrap("call.third_function")
+@tracer.wrap("third_function")
 def third_function():
     try:
         fourth_function()
     except ValueError as e:
-        raise ValueError('failed to call fourth_function in third_function')
+        raise ValueError('error when calling fourth_function in third_function')
 
-@tracer.wrap("call.fourth_function")
+@tracer.wrap("fourth_function")
 def fourth_function():
     try:
         s = "baba"

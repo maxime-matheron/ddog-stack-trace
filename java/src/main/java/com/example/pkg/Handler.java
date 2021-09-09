@@ -15,7 +15,7 @@ public class Handler {
         try {
             this.thirdFunction();
         } catch (Exception e) {
-            Exception chained = new Exception("failed when calling second_function");
+            Exception chained = new Exception("error when calling second_function in third_function");
             chained.initCause(e);
             throw chained;
         }
@@ -26,7 +26,9 @@ public class Handler {
         try {
             this.fourthFunction();
         } catch (Exception e) {
-            throw new Exception("failed when calling fourth_function");
+            Exception chained = new Exception("error when calling fourth_function in third_function");
+            chained.initCause(e);
+            throw chained;
         }
     }
 
